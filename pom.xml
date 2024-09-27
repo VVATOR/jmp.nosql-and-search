@@ -11,6 +11,10 @@
     <description>JMP NoSQL and Search</description>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>module-1-nosql</module>
+    </modules>
+
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
