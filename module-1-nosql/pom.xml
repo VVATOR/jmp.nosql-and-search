@@ -14,4 +14,8 @@
     <name>Module 1: NoSQL</name>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>task-1-backend-db-migration</module>
+    </modules>
+
 </project>

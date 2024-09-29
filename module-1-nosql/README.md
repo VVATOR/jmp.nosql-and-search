@@ -11,7 +11,7 @@ Task 1: Backend Database Migration
 **Cost**: 50 points.
 
 Move one of your pet applications/mentoring projects with DAO and simple CRUD to MongoDB.
-In case you don't have such projects you can use the sample project attached ([ticket-booking.zip](./Content/ticket-booking.zip))
+In case you don't have such projects you can use the sample project attached ([ticket-booking.zip](task-1-backend-db-migration/static/ticket-booking.zip))
 
 Install MongoDB and use the corresponding Java driver.
 
