@@ -1,0 +1,1316 @@
+{
+	"info": {
+		"_postman_id": "af0fd4b6-f6d1-4303-8a20-59c05ddf6779",
+		"name": "Elasticsearch Practical Tasks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1537983"
+	},
+	"item": [
+		{
+			"name": "Task 1 - Indexing and CRUD operations (20 Points)",
+			"item": [
+				{
+					"name": "1. Start Elasticsearch",
+					"item": [
+						{
+							"name": "1 health",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9200/_cluster/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"_cluster",
+										"health"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 stats",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9200/_cluster/health",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"_cluster",
+										"health"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "2.\tCreate an index and populate it with data",
+					"item": [
+						{
+							"name": "1 Create an index and populate it with data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "postman-cloud:///1ef8ef56-43ce-49a0-9374-710892161b2c"
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_bulk",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_bulk"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3. Perform CRUD operations using Postman, Elasticsearch Head or other Rest client.",
+					"item": [
+						{
+							"name": "1. Get all records  (you may starts with POST http://localhost:9200/employees/_search to see ids assigned to the records.     It was possible to assign ids explicitely while doing bulk upload, but we let Elasticsearch to set ids randomly).",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Get an employee by id.",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_doc/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_doc",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Create a new employee and put in into the index. (auto id)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Vitali Vikhliayeu\",\r\n  \"dob\": \"1991-06-16\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"vv@gmail.com\",\r\n  \"skills\": [\"Java\", \"AWS\"],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_doc/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_doc",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Create a new employee and put in into the index. (specified id)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Ana Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_doc/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_doc",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Add one more employee and try multi-get request. It may look like: GET http://localhost:9200/employees/_mget {\"docs\": [{\"_id\": \"1\"},{\"_id\": \"2\"}]}",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"docs\": [\r\n    {\"_id\": \"1\"},\r\n    {\"_id\": \"2\"}\r\n  ]\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_mget",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_mget"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. Learn mapping, automatically created by Elasticsearch. (text)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_mapping",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_mapping"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. Update one of empoyee data. Add one more skill",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"XXX Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_doc/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_doc",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "7. Delete one of employees by its id.",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_doc/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_doc",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get By name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"name\": \"Vitali Vikhliayeu\"\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9200/employees/_search?pretty",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"employees",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new Employee ANNA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Ana Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:9200/employees/_doc/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"employees",
+								"_doc",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Task 2 - Querying and aggregating data (40 Points)",
+			"item": [
+				{
+					"name": "1. Searching",
+					"item": [
+						{
+							"name": "1 Get employees with  \"description\":\"motivated\" using Match query",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"description\": \"motivated\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 SEARCH BY description: \"highly motivated\"",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"description\": \"highly motivated\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_doc/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_doc",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2 SEARCH BY description: \"highly motivated\" AND",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"description\": {\r\n        \"query\": \"highly motivated\",\r\n        \"operator\": \"AND\"\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Run multi_match query to get employees with \"python\" either in \"skills\" or in \"description\" fields.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"multi_match\": {\r\n      \"query\": \"python\",\r\n      \"fields\": [\"skills\", \"description\"]\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Get employee with \"name\" : \"stepanie\" using Term query.      Try the same with \"name\" : \"Stepanie\" and  \"name\" : \"Stepanie Spain\". Did you get the result? Why?",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name\": \"Stepanie\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. Get employee with \"name.keyword\" : \"stepanie\" using Terms query.     Try \"name.keyword\" : \"Stepanie Spain\". Review the difference between Match and Term queries as well as between text and keyword types search.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name.keyword\": \"Stepanie Spain\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "6. Get employees by several names using Terms query with array of values.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"terms\": {\r\n      \"name.keyword\": [\"Stepanie Spain\", \"Carey Catlett\"]\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "7. Get employees with experience from 5 to 20 years using Range query.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"experience\": {\r\n        \"gte\": 5,\r\n        \"lte\": 20\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "8. Get employees younger then 1,Jan,2000 using Range query.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"dob\": {\r\n        \"gte\": \"2000-01-01\"\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "9. Perform Wildcard search, for example \"address.town\":{\"value\": \"b*y\"}.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"wildcard\": {\r\n      \"address.town\": {\r\n        \"value\": \"b*y\"\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "10. Replace it by Regexp to get only \"Batley\"",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"regexp\": {\r\n      \"address.town\": \"Batley\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "11 Investigate how Fuzzy query works. Make two spelling mistakes in the town, set \"fuzziness\": \"2\",  and check you get the town in the response anyway.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"fuzzy\": {\r\n      \"address.town\": {\r\n        \"value\": \"Batlley\",\r\n        \"fuzziness\": 2\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "2. Aggregations",
+					"item": [
+						{
+							"name": "1. Aggregate employees by skills. You shoud use \"skills.keyword\" here.",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"aggs\": {\r\n    \"skills_agg\": {\r\n      \"terms\": {\r\n        \"field\": \"skills.keyword\"\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search?size=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Filter out employees by adding filter condition to the previous aggregation query.  Aggregate verified employees only.",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"verified\": true\r\n    }\r\n  },\r\n  \"aggs\": {\r\n    \"skills_agg\": {\r\n      \"terms\": {\r\n        \"field\": \"skills.keyword\"\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search?size=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Add average metric on \"field\": \"rating\" to every bucket from the previous aggregation.      You'll need to add nested avg aggregation.",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"aggs\": {\r\n    \"skills_agg\": {\r\n      \"terms\": {\r\n        \"field\": \"skills.keyword\"\r\n      },\r\n      \"aggs\": {\r\n        \"avg_rating\": {\r\n          \"avg\": {\r\n            \"field\": \"rating\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search?size=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Replace avarage aggregation by stats aggregation. Sort skills buckets by average stats metric DESC.     \"order\": {\"rating_stats.avg\": \"desc\"}.",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"aggs\": {\r\n    \"skills_agg\": {\r\n      \"terms\": {\r\n        \"field\": \"skills.keyword\",\r\n        \"order\": {\r\n          \"rating_stats.avg\": \"desc\"\r\n        }\r\n      },\r\n      \"aggs\": {\r\n        \"rating_stats\": {\r\n          \"stats\": {\r\n            \"field\": \"rating\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search?size=0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									],
+									"query": [
+										{
+											"key": "size",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "3. Joining",
+					"item": [
+						{
+							"name": "init data",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"index\": { \"_index\": \"post-comments\", \"_id\": \"1\" } }\r\n{ \"_join_type\": { \"name\": \"post\" }, \"post_title\" : \"Angel Has Fallen\" }\r\n{ \"index\": { \"_index\": \"post-comments\", \"_id\": \"2\" } }\r\n{ \"_join_type\": { \"name\": \"post\" }, \"post_title\" : \"Beauty and the beast - a nice movie\" }\r\n{ \"index\": { \"_index\": \"post-comments\", \"_id\": \"A\", \"routing\": 1 } }\r\n{ \"_join_type\": { \"name\": \"comment\", \"parent\": \"1\" }, \"comment_author\": \"Neil Soans\", \"comment_description\": \"'Angel has Fallen' has some redeeming qualities, but they're too few and far in between to justify its existence\" }\r\n{ \"index\": { \"_index\": \"post-comments\", \"_id\": \"B\", \"routing\": 1 } }\r\n{ \"_join_type\": { \"name\": \"comment\", \"parent\": \"1\" }, \"comment_author\": \"Exiled Universe\", \"comment_description\": \"Best in the trilogy! This movie wasn't better than the Rambo movie but it was very very close.\" }\r\n{ \"index\": { \"_index\": \"post-comments\", \"_id\": \"C\", \"routing\": 2 } }\r\n{ \"_join_type\": { \"name\": \"comment\", \"parent\": \"2\" }, \"comment_author\": \"Emma Cochrane\", \"comment_description\": \"There's the sublime beauty of a forgotten world and the promise of happily-ever-after to draw you to one of your favourite fairy tales, once again. Give it an encore.\" }\r\n{ \"index\": { \"_index\": \"post-comments\", \"_id\": \"D\", \"routing\": 2 } }\r\n{ \"_join_type\": { \"name\": \"comment\", \"parent\": \"2\" }, \"comment_author\": \"Common Sense Media Editors\", \"comment_description\": \"Stellar music, brisk storytelling, delightful animation, and compelling characters make this both a great animated feature for kids and a great movie for anyone\" }\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_bulk",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_bulk"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create the index with join data type with the below request",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"mappings\": {\r\n    \"properties\": {\r\n      \"_join_type\": { \r\n        \"type\": \"join\",\r\n        \"relations\": {\r\n          \"post\": \"comment\" \r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post-comments/_doc/1",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"_join_type\": {\r\n    \"name\": \"post\" \r\n  },\r\n\"post_title\" : \"Angel Has Fallen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_doc/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_doc",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post-comments/_doc/2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"_join_type\": {\r\n    \"name\": \"post\" \r\n  },\r\n\"post_title\" : \"Angel Has Fallen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_doc/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_doc",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post-comments/_doc/A?routing=1",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"_join_type\": {\r\n    \"name\": \"post\" \r\n  },\r\n\"post_title\" : \"Angel Has Fallen\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_doc/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_doc",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post-comments/_doc/B?routing=1",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"_join_type\": {\r\n    \"name\": \"comment\",\r\n    \"parent\": \"1\"\r\n  },\r\n  \"comment_author\": \"Exiled Universe\",\r\n  \"comment_description\": \"Best in the trilogy! This movie wasn't better than the Rambo movie but it was very very close.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_doc/B?routing=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_doc",
+										"B"
+									],
+									"query": [
+										{
+											"key": "routing",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post-comments/_doc/D?routing=2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"_join_type\": {\r\n\"name\": \"comment\",\r\n\"parent\": \"2\"\r\n},\r\n\"comment_author\": \"Common Sense Media Editors\",\r\n\"comment_description\": \"Stellar music, brisk storytelling, delightful animation, and compelling characters make this both a great animated feature for kids and a great movie for anyone\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_doc/D?routing=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_doc",
+										"D"
+									],
+									"query": [
+										{
+											"key": "routing",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "post-comments/_doc/C?routing=2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"_join_type\": {\r\n\"name\": \"comment\",\r\n\"parent\": \"2\"\r\n},\r\n\"comment_author\": \"Emma Cochrane\",\r\n\"comment_description\": \"There's the sublime beauty of a forgotten world and the promise of happily-ever-after to draw you to one of your favourite fairy tales, once again. Give it an encore.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_doc/C?routing=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_doc",
+										"C"
+									],
+									"query": [
+										{
+											"key": "routing",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1. Query the child’s documents and return the parent documents Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"has_child\": {\r\n      \"type\": \"comment\",\r\n      \"query\": {\r\n        \"match\": {\r\n          \"comment_description\": \"music\"\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_search?pretty",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_search"
+									],
+									"query": [
+										{
+											"key": "pretty",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Query the parent’s documents and return the child documents",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"has_parent\": {\r\n      \"parent_type\": \"post\",\r\n      \"query\": {\r\n        \"match\": {\r\n          \"post_title\": \"Beauty\"\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/post-comments/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"post-comments",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "4. Suggesting",
+					"item": [
+						{
+							"name": "1. Run a \"suggest\" request on \"description\" field. Provide a text (or a single word) which is supposed to exist in the description field with 1-2 mistakes.      See if suggester returns the original text/word. Change number of mistakes and observe the res",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"suggest\": {\r\n    \"desc_suggestion\": {\r\n      \"text\": \"motivatd\",\r\n      \"term\": {\r\n        \"field\": \"description\"\r\n      }\r\n    }\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9200/employees/_search",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9200",
+									"path": [
+										"employees",
+										"_search"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

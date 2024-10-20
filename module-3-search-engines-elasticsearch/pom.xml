@@ -14,4 +14,10 @@
     <name>Module 3: Search Engines: Elasticsearch</name>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>task-3-elasticsearch-low-level-rest-client</module>
+        <module>task-4-elasticsearch-java-api-client</module>
+    </modules>
+
+
 </project>

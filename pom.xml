@@ -16,5 +16,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <modules>
+        <module>module-3-search-engines-elasticsearch</module>
+    </modules>
 
 </project>
