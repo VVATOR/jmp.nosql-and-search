@@ -17,10 +17,9 @@ When client make any request to some business service, business service send rat
 If server respond with 200 OK, business service process this request. If client exceed it requests limit, rate limit server
 respond with 429 Too many requests and business service respond back to client with HTTP 429 without processing the request.
 
-![Context diagram](Content/Redis-Lab-Context%20Diagram.drawio.png)
+![img.png](./statics/Redis-Lab-Context-Diagram.drawio.png)
 
-![Sequence diagram](Content/Redis-Lab-Behavior%20And%20Responsibilities.drawio.png)
-
+![img.png](./statics/Redis-Lab-Behavior-And-Responsibilities.drawio.png)
 Rate limit request consist of array of request descriptors. Request descriptor consists of following fields:
 * accountId - string, optional
 * clientIp - string, optional
@@ -100,7 +99,7 @@ second Rate Limit Descriptor matches second Rate Limit Rule (allow only 3 login 
 
 ### Data Model
 
-![Data Model](Content/Redis-Lab-Data%20Model.drawio.png)
+![img.png](./statics/Redis-Lab-Data-Model.drawio.png)
 
 **Client Request to Request Descriptor relation**
 
@@ -130,8 +129,7 @@ are counted independently.
 ### Fixed window rate limit
 Fixed window rate limit assumes that requests count is bind to wall clock minutes, hours, days.
 The diagram below illustrates fixed window rate limit with limit of 2 requests per minute.
-![Data Model](Content/Redis-Lab-Fixed%20Window%20Ratelimit.drawio.png)
-
+![img.png](./statics/Redis-Lab-Fixed-Window-Ratelimit.drawio.png)
 ## Lab tasks
 
 ### Mandatory lab task
