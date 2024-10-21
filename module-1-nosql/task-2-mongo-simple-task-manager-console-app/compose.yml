@@ -1,0 +1,17 @@
+# Use postgres/example user/password credentials
+##conf mongo cluster example:
+#  https://dev.to/mattdark/deploy-a-mongodb-cluster-with-docker-compose-4ieo
+
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    ports:
+      - 27011:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: task_manager_db

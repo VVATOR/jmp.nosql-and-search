@@ -16,6 +16,7 @@
 
     <modules>
         <module>task-1-backend-db-migration</module>
+        <module>task-2-mongo-simple-task-manager-console-app</module>
     </modules>
 
 </project>

@@ -14,8 +14,8 @@
 
     <modules>
         <module>ticket-booking</module>
-        <module>ticket-booking-mongo</module>
         <module>ticket-booking-migration-job</module>
+        <module>ticket-booking-mongo</module>
     </modules>
 
     <properties>
