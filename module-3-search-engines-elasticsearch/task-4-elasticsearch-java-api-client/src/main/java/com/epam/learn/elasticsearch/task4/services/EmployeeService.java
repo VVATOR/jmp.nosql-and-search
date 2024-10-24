@@ -4,9 +4,6 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
 import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
 import co.elastic.clients.elasticsearch._types.aggregations.AggregationBuilders;
-import co.elastic.clients.elasticsearch._types.query_dsl.MatchQuery;
-import co.elastic.clients.elasticsearch._types.query_dsl.Query;
-import co.elastic.clients.elasticsearch.core.GetResponse;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -27,20 +25,39 @@ public class EmployeeService {
     }
 
     public List<Employee> getAllEmployees() throws IOException {
-        SearchRequest searchRequest = SearchRequest.of(s -> s.index(EMPLOYEES_INDEX_NAME));
-        SearchResponse<Employee> searchResponse = client.search(searchRequest, Employee.class);
+        SearchResponse<Employee> searchResponse = client.search(s -> s
+                .index(EMPLOYEES_INDEX_NAME)
+                .query(q -> q.matchAll(m -> m)), Employee.class);
 
-        return searchResponse.hits().hits().stream()
-                .map(Hit::source)
-                .toList();
+        return searchResponse.hits().hits().stream().map(hit -> {
+            Employee employee = hit.source();
+            employee.setId(hit.id());
+            return employee;
+        }).collect(Collectors.toList());
     }
 
     public Employee getEmployeeById(String id) throws IOException {
-        GetResponse<Employee> response = client.get(g -> g
-                .index(EMPLOYEES_INDEX_NAME)
-                .id(id), Employee.class);
+        SearchResponse<Employee> searchResponse = client.search(s -> s
+                        .index(EMPLOYEES_INDEX_NAME)
+                        .query(q -> q
+                                .term(t -> t
+                                        .field("_id")
+                                        .value(id)
+                                )
+                        ),
+                Employee.class
+        );
 
-        return response.source();
+        if (searchResponse.hits().hits().isEmpty()) {
+            return null;
+        }
+
+        Hit<Employee> hit = searchResponse.hits().hits().get(0);
+        Employee employee = hit.source();
+
+        employee.setId(hit.id());
+
+        return employee;
     }
 
     public void createEmployee(String id, Employee employee) throws IOException {
@@ -57,28 +74,24 @@ public class EmployeeService {
     }
 
     public List<Employee> searchEmployees(String field, String value) throws IOException {
-        Query query = MatchQuery.of(m -> m
-                .field(field)
-                .query(value)
-        )._toQuery();
-
-        SearchResponse<Employee> response = client.search(s -> s
+        SearchResponse<Employee> searchResponse = client.search(s -> s
                 .index(EMPLOYEES_INDEX_NAME)
-                .query(query), Employee.class);
+                .query(q -> q
+                        .match(t -> t
+                                .field(field)
+                                .query(value)
+                        )
+                ), Employee.class);
 
-        return response.hits().hits().stream()
-                .map(Hit::source)
-                .toList();
+        return searchResponse.hits().hits().stream().map(hit -> {
+            Employee employee = hit.source();
+            employee.setId(hit.id());
+            return employee;
+        }).toList();
     }
 
-    public double aggregateEmployeesByField(String field, String metricType) throws IOException {
-        Aggregation aggregation = switch (metricType) {
-            case "avg" -> AggregationBuilders.avg(a -> a.field(field));
-            case "sum" -> AggregationBuilders.sum(s -> s.field(field));
-            case "min" -> AggregationBuilders.min(m -> m.field(field));
-            case "max" -> AggregationBuilders.max(m -> m.field(field));
-            default -> throw new IllegalArgumentException("Unsupported metric type: " + metricType);
-        };
+    public double aggregateEmployeesByField(String field) throws IOException {
+        Aggregation aggregation = AggregationBuilders.avg(a -> a.field(field));
         SearchRequest searchRequest = SearchRequest.of(s -> s
                 .index(EMPLOYEES_INDEX_NAME)
                 .aggregations("agg", aggregation)

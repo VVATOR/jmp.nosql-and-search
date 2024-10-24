@@ -35,12 +35,16 @@ public class EmployeeService {
         HttpGet request = new HttpGet(elasticSearchHost + EMPLOYEES_INDEX_NAME + "/_search");
         HttpResponse response = httpClient.execute(request);
         String json = EntityUtils.toString(response.getEntity());
-
         Map<String, Object> responseMap = objectMapper.readValue(json, Map.class);
         List<Map<String, Object>> hits = (List<Map<String, Object>>) ((Map<String, Object>) responseMap.get("hits")).get("hits");
 
+        // Преобразуем каждый элемент hits в объект Employee и добавляем id из _id
         return hits.stream()
-                .map(hit -> objectMapper.convertValue(hit.get("_source"), Employee.class))
+                .map(hit -> {
+                    Employee employee = objectMapper.convertValue(hit.get("_source"), Employee.class);
+                    employee.setId((String) hit.get("_id"));
+                    return employee;
+                })
                 .toList();
     }
 
@@ -48,10 +52,12 @@ public class EmployeeService {
         HttpGet request = new HttpGet(elasticSearchHost + EMPLOYEES_INDEX_NAME + "/_doc/" + id);
         HttpResponse response = httpClient.execute(request);
         String json = EntityUtils.toString(response.getEntity());
-
         Map<String, Object> responseMap = objectMapper.readValue(json, Map.class);
-        return objectMapper.convertValue(responseMap.get("_source"), Employee.class);
+        Employee employee = objectMapper.convertValue(responseMap.get("_source"), Employee.class);
+        employee.setId((String) responseMap.get("_id"));
+        return employee;
     }
+
 
     public void createEmployee(String id, Employee employee) throws IOException {
         String json = objectMapper.writeValueAsString(employee);
@@ -72,22 +78,20 @@ public class EmployeeService {
         HttpPost request = new HttpPost(elasticSearchHost + EMPLOYEES_INDEX_NAME + "/_search");
         request.setEntity(new StringEntity(query));
         request.setHeader("Content-Type", "application/json");
-
         HttpResponse response = httpClient.execute(request);
         String json = EntityUtils.toString(response.getEntity());
-
         Map<String, Object> responseMap = objectMapper.readValue(json, Map.class);
         List<Map<String, Object>> hits = (List<Map<String, Object>>) ((Map<String, Object>) responseMap.get("hits")).get("hits");
-
         return hits.stream()
                 .map(hit -> objectMapper.convertValue(hit.get("_source"), Employee.class))
                 .toList();
     }
 
-    public double aggregateEmployeesByField(String field, String metricType) throws IOException {
+
+    public double aggregateEmployeesByField(String field) throws IOException {
         String aggregationQuery = String.format(
                 "{ \"size\": 0, \"aggs\": { \"agg\": { \"%s\": { \"field\": \"%s\" } } } }",
-                metricType, field
+                "avg", field
         );
 
         HttpPost request = new HttpPost(elasticSearchHost + EMPLOYEES_INDEX_NAME + "/_search");
@@ -101,17 +105,6 @@ public class EmployeeService {
         Map<String, Object> aggregations = (Map<String, Object>) responseMap.get("aggregations");
         Map<String, Object> agg = (Map<String, Object>) aggregations.get("agg");
 
-        switch (metricType) {
-            case "avg":
-                return (Double) agg.get("value");
-            case "sum":
-                return (Double) agg.get("value");
-            case "min":
-                return (Double) agg.get("value");
-            case "max":
-                return (Double) agg.get("value");
-            default:
-                throw new IllegalArgumentException("Unsupported metric type: " + metricType);
-        }
+        return (Double) agg.get("value");
     }
 }

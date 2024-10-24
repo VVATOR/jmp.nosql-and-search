@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "af0fd4b6-f6d1-4303-8a20-59c05ddf6779",
 		"name": "Elasticsearch Practical Tasks",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "1537983"
 	},
 	"item": [
@@ -17,18 +17,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "http://localhost:9200/_cluster/health",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"_cluster",
-										"health"
-									]
-								}
+								"url": "http://localhost:9200/_cluster/health"
 							},
 							"response": []
 						},
@@ -37,18 +26,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "http://localhost:9200/_cluster/health",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"_cluster",
-										"health"
-									]
-								}
+								"url": "http://localhost:9200/_cluster/stats"
 							},
 							"response": []
 						}
@@ -74,18 +52,7 @@
 										"src": "postman-cloud:///1ef8ef56-43ce-49a0-9374-710892161b2c"
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_bulk",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_bulk"
-									]
-								}
+								"url": "http://localhost:9200/employees/_bulk"
 							},
 							"response": []
 						}
@@ -112,18 +79,7 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -145,50 +101,7 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_doc/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_doc",
-										"2"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "3. Create a new employee and put in into the index. (auto id)",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"Vitali Vikhliayeu\",\r\n  \"dob\": \"1991-06-16\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"vv@gmail.com\",\r\n  \"skills\": [\"Java\", \"AWS\"],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}"
-								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_doc/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_doc",
-										""
-									]
-								}
+								"url": "http://localhost:9200/employees/_doc/q4utuJIBZ1p6gGrvNu82"
 							},
 							"response": []
 						},
@@ -207,19 +120,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"name\": \"Ana Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_doc/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_doc",
-										"2"
-									]
-								}
+								"url": "http://localhost:9200/employees/_doc/3"
 							},
 							"response": []
 						},
@@ -239,20 +140,9 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"docs\": [\r\n    {\"_id\": \"1\"},\r\n    {\"_id\": \"2\"}\r\n  ]\r\n}"
+									"raw": "{\r\n  \"docs\": [\r\n    {\"_id\": \"1\"},\r\n    {\"_id\": \"2\"},\r\n    {\"_id\": \"3\"}\r\n  ]\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_mget",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_mget"
-									]
-								}
+								"url": "http://localhost:9200/employees/_mget"
 							},
 							"response": []
 						},
@@ -274,18 +164,7 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_mapping",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_mapping"
-									]
-								}
+								"url": "http://localhost:9200/employees/_mapping"
 							},
 							"response": []
 						},
@@ -302,21 +181,9 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"name\": \"XXX Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}\r\n"
+									"raw": "{\r\n  \"name\": \"Updated Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\",\r\n    \"DevOps\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}\r\n"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_doc/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_doc",
-										"2"
-									]
-								}
+								"url": "http://localhost:9200/employees/_doc/2"
 							},
 							"response": []
 						},
@@ -335,93 +202,11 @@
 									"mode": "raw",
 									"raw": ""
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_doc/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_doc",
-										"2"
-									]
-								}
+								"url": "http://localhost:9200/employees/_doc/2"
 							},
 							"response": []
 						}
 					]
-				},
-				{
-					"name": "Get By name",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"name\": \"Vitali Vikhliayeu\"\r\n    }\r\n  }\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:9200/employees/_search?pretty",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9200",
-							"path": [
-								"employees",
-								"_search"
-							],
-							"query": [
-								{
-									"key": "pretty",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create new Employee ANNA",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Ana Brown\",\r\n  \"dob\": \"1993-03-19\",\r\n  \"address\": {\r\n    \"country\": \"Belarus\",\r\n    \"town\": \"Gomel\"\r\n  },\r\n  \"email\": \"anabrown9@gmail.com\",\r\n  \"skills\": [\r\n    \"Java\",\r\n    \"AWS\"\r\n  ],\r\n  \"experience\": 10,\r\n  \"rating\": 9.2,\r\n  \"description\": \"confident, ambitious, highly motivated Java experience interview learning python\",\r\n  \"verified\": true,\r\n  \"salary\": 30000\r\n}\r\n"
-						},
-						"url": {
-							"raw": "http://localhost:9200/employees/_doc/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9200",
-							"path": [
-								"employees",
-								"_doc",
-								""
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -446,23 +231,12 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"description\": \"motivated\"\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
 						{
-							"name": "2 SEARCH BY description: \"highly motivated\"",
+							"name": "2 SEARCH BY description: \"highly motivated\" (default OR condition))",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -476,19 +250,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"description\": \"highly motivated\"\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_doc/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_doc",
-										""
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -507,18 +269,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"match\": {\r\n      \"description\": {\r\n        \"query\": \"highly motivated\",\r\n        \"operator\": \"AND\"\r\n      }\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -537,23 +288,31 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"multi_match\": {\r\n      \"query\": \"python\",\r\n      \"fields\": [\"skills\", \"description\"]\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
 						{
-							"name": "4. Get employee with \"name\" : \"stepanie\" using Term query.      Try the same with \"name\" : \"Stepanie\" and  \"name\" : \"Stepanie Spain\". Did you get the result? Why?",
+							"name": "4. Get employee with \"name\" : \"stepanie\" using term query.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name\": \"stepanie\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": "http://localhost:9200/employees/_search"
+							},
+							"response": []
+						},
+						{
+							"name": "4. Get employee with \"name\" : \"Stepanie\" using term query",
 							"request": {
 								"method": "POST",
 								"header": [
@@ -567,18 +326,26 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name\": \"Stepanie\"\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
+							},
+							"response": []
+						},
+						{
+							"name": "4. Get employee with \"name\" : \"Stepanie Spain\" using term query Copy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name\": \"Stepanie Spain\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -595,20 +362,28 @@
 								],
 								"body": {
 									"mode": "raw",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name.keyword\": \"stepanie\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": "http://localhost:9200/employees/_search"
+							},
+							"response": []
+						},
+						{
+							"name": "5. Get employee with \"name.keyword\" : \"Stepanie Spain\" using terms query.",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"name.keyword\": \"Stepanie Spain\"\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -627,18 +402,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"terms\": {\r\n      \"name.keyword\": [\"Stepanie Spain\", \"Carey Catlett\"]\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -657,18 +421,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"experience\": {\r\n        \"gte\": 5,\r\n        \"lte\": 20\r\n      }\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -687,18 +440,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"range\": {\r\n      \"dob\": {\r\n        \"gte\": \"2000-01-01\"\r\n      }\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -717,18 +459,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"wildcard\": {\r\n      \"address.town\": {\r\n        \"value\": \"b*y\"\r\n      }\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -745,20 +476,9 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"query\": {\r\n    \"regexp\": {\r\n      \"address.town\": \"Batley\"\r\n    }\r\n  }\r\n}"
+									"raw": "{\r\n  \"query\": {\r\n    \"regexp\": {\r\n      \"address.town\": {\r\n        \"value\": \"Ba.*y\",\r\n        \"case_insensitive\": true\r\n      }\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						},
@@ -777,18 +497,7 @@
 									"mode": "raw",
 									"raw": "{\r\n  \"query\": {\r\n    \"fuzzy\": {\r\n      \"address.town\": {\r\n        \"value\": \"Batlley\",\r\n        \"fuzziness\": 2\r\n      }\r\n    }\r\n  }\r\n}"
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						}
@@ -874,7 +583,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"aggs\": {\r\n    \"skills_agg\": {\r\n      \"terms\": {\r\n        \"field\": \"skills.keyword\"\r\n      },\r\n      \"aggs\": {\r\n        \"avg_rating\": {\r\n          \"avg\": {\r\n            \"field\": \"rating\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
+									"raw": "{\r\n  \"query\": {\r\n    \"term\": {\r\n      \"verified\": true\r\n    }\r\n  },\r\n  \"aggs\": {\r\n    \"skills_agg\": {\r\n      \"terms\": {\r\n        \"field\": \"skills.keyword\"\r\n      },\r\n      \"aggs\": {\r\n        \"avg_rating\": {\r\n          \"avg\": {\r\n            \"field\": \"rating\"\r\n          }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -962,18 +671,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/post-comments/_bulk",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"post-comments",
-										"_bulk"
-									]
-								}
+								"url": "http://localhost:9200/post-comments/_bulk"
 							},
 							"response": []
 						},
@@ -991,18 +689,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/post-comments/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"post-comments",
-										""
-									]
-								}
+								"url": "http://localhost:9200/post-comments/"
 							},
 							"response": []
 						},
@@ -1020,19 +707,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/post-comments/_doc/1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"post-comments",
-										"_doc",
-										"1"
-									]
-								}
+								"url": "http://localhost:9200/post-comments/_doc/1"
 							},
 							"response": []
 						},
@@ -1050,19 +725,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/post-comments/_doc/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"post-comments",
-										"_doc",
-										"2"
-									]
-								}
+								"url": "http://localhost:9200/post-comments/_doc/2"
 							},
 							"response": []
 						},
@@ -1080,19 +743,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/post-comments/_doc/2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"post-comments",
-										"_doc",
-										"2"
-									]
-								}
+								"url": "http://localhost:9200/post-comments/_doc/2"
 							},
 							"response": []
 						},
@@ -1205,7 +856,7 @@
 							"response": []
 						},
 						{
-							"name": "1. Query the child’s documents and return the parent documents Copy",
+							"name": "1. Query the child’s documents and return the parent documents",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -1259,18 +910,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/post-comments/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"post-comments",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/post-comments/_search"
 							},
 							"response": []
 						}
@@ -1293,18 +933,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "http://localhost:9200/employees/_search",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9200",
-									"path": [
-										"employees",
-										"_search"
-									]
-								}
+								"url": "http://localhost:9200/employees/_search"
 							},
 							"response": []
 						}

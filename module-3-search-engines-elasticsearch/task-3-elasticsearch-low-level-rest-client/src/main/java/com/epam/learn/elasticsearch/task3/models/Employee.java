@@ -3,6 +3,8 @@ package com.epam.learn.elasticsearch.task3.models;
 import java.util.List;
 
 public class Employee {
+
+    private String id;
     private String name;
     private String dob;
     private Address address;
@@ -18,7 +20,8 @@ public class Employee {
         super();
     }
 
-    public Employee(String name, String dob, Address address, String email, List<String> skills, int experience, double rating, String description, boolean verified, int salary) {
+    public Employee(String id, String name, String dob, Address address, String email, List<String> skills, int experience, double rating, String description, boolean verified, int salary) {
+        this.id = id;
         this.name = name;
         this.dob = dob;
         this.address = address;
@@ -29,6 +32,14 @@ public class Employee {
         this.description = description;
         this.verified = verified;
         this.salary = salary;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

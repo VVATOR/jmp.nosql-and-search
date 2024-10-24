@@ -43,8 +43,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/aggregate")
-    public double aggregateEmployeesByField(@RequestParam String field, @RequestParam String metricType) throws IOException {
-        return employeeService.aggregateEmployeesByField(field, metricType);
+    public double aggregateEmployeesByField(@RequestParam String field) throws IOException {
+        return employeeService.aggregateEmployeesByField(field);
     }
 
 }
